@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 
+// 함수 선언
 int **createMatrix(int rows, int cols);
 void fillMatrix(int **matrix, int rows, int cols);
 void printMatrix(int **matrix, int rows, int cols);
@@ -13,10 +14,11 @@ int **transposeMatrix(int **matrix, int rows, int cols);
 int **multiplicationMatrix(int **matrix1, int **matrix2, int rows1, int cols1, int rows2, int cols2);
 
 int main(){
+    // 변수 선언 - 행렬 1, 2의 행, 열
     int rows1, cols1, rows2, cols2;
 
     printf("========================================\n");
-    printf("[ ---- [ 서동우 ] [ 2021041094 ] ---- ]\n");
+    printf("[ ---- [ Suh Dong Woo ] [ 2021041094 ] ---- ]\n");
     printf("========================================\n");
 
     printf("Rows and Columns of Matrix 1: ");
@@ -25,6 +27,7 @@ int main(){
     printf("Rows and Columns of Matrix 2: ");
     scanf("%d %d", &rows2, &cols2);
 
+    // 행렬 1, 2의 행, 열 수가 다를 경우 오류 출력용
     if (rows1 != rows2 || cols1 != cols2){
         printf("Matrix 1 and Matrix 2 must have the same size\n");
         return 0;
@@ -35,6 +38,7 @@ int main(){
     int **matrix1 = createMatrix(rows1, cols1);
     int **matrix2 = createMatrix(rows2, cols2);
 
+    // 행렬 1, 2에 랜덤 값
     srand(time(NULL));
     fillMatrix(matrix1, rows1, cols1);
     fillMatrix(matrix2, rows2, cols2);
@@ -75,6 +79,7 @@ int main(){
 }
 
 int **createMatrix(int rows, int cols){
+    // 행렬 생성
     int **matrix = (int **)malloc(rows * sizeof(int *));
     for (int i = 0; i < rows; i++){
         matrix[i] = (int *)malloc(cols * sizeof(int));
@@ -83,6 +88,7 @@ int **createMatrix(int rows, int cols){
 }
 
 void fillMatrix(int **matrix, int rows, int cols){
+    // 행렬에 랜덤 값
     for (int i = 0; i < rows; i++){
         for (int j = 0; j < cols; j++){
             matrix[i][j] = rand() % 10;
@@ -91,6 +97,7 @@ void fillMatrix(int **matrix, int rows, int cols){
 }
 
 void printMatrix(int **matrix, int rows, int cols){
+    // 행렬 출력
     for (int i = 0; i < rows; i++){
         for (int j = 0; j < cols; j++){
             printf("%d ", matrix[i][j]);
@@ -100,6 +107,7 @@ void printMatrix(int **matrix, int rows, int cols){
 }
 
 void freeMatrix(int **matrix, int rows){
+    // 행렬 메모리 해제
     for (int i = 0; i < rows; i++){
         free(matrix[i]);
     }
@@ -107,6 +115,7 @@ void freeMatrix(int **matrix, int rows){
 }
 
 int **additionMatrix(int **matrix1, int **matrix2, int rows, int cols){
+    // 행렬 덧셈
     int **addition = createMatrix(rows, cols);
     for (int i = 0; i < rows; i++){
         for (int j = 0; j < cols; j++){
@@ -117,6 +126,7 @@ int **additionMatrix(int **matrix1, int **matrix2, int rows, int cols){
 }
 
 int **subtractionMatrix(int **matrix1, int **matrix2, int rows, int cols){
+    // 행렬 뺄셈
     int **subtraction = createMatrix(rows, cols);
     for (int i = 0; i < rows; i++){
         for (int j = 0; j < cols; j++){
@@ -127,6 +137,7 @@ int **subtractionMatrix(int **matrix1, int **matrix2, int rows, int cols){
 }
 
 int **transposeMatrix(int **matrix, int rows, int cols){
+    // 행렬 전치 -> 행과 열을 바꿈 (rows, cols -> cols, rows)
     int **transpose = createMatrix(cols, rows);
     for (int i = 0; i < cols; i++){
         for (int j = 0; j < rows; j++){
@@ -137,6 +148,7 @@ int **transposeMatrix(int **matrix, int rows, int cols){
 }
 
 int **multiplicationMatrix(int **matrix1, int **matrix2, int rows1, int cols1, int rows2, int cols2){
+    // 행렬 곱셈
     int **multiplication = createMatrix(rows1, cols2);
     for (int i = 0; i < rows1; i++){
         for (int j = 0; j < cols2; j++){
